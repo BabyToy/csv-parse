@@ -1,0 +1,9 @@
+{
+  "name": "csv-parse",
+  "version": "0.0.0",
+  "description": "csv-parse",
+  "main": "app.js",
+  "author": {
+    "name": "MXL02"
+  }
+}
