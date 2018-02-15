@@ -10,9 +10,10 @@ module.exports = function (file) {
       let list = [];
       for (var result of results) {
         let tiers = [];
-        for (var index = 1; index < Object.keys(result).length; index++) {
-          const tier = 'tier' + index.toString();
-          tiers.push(parseInt(result[tier]));
+        const thisObject = Object.keys(result);
+        for (var index = 1; index < thisObject.length; index++) {
+          const tier = result[thisObject[index]];
+          tiers.push(tier);
         }
         list.push({
           itemId: result.itemId,
