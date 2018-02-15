@@ -3,8 +3,7 @@
 'use strict';
 
 const PromisedCsv = require('promised-csv');
-const handler = new PromisedCsv();
-const TIERLIMIT = 3;
+const reader = new PromisedCsv();
 
 /**
  *
@@ -13,22 +12,27 @@ const TIERLIMIT = 3;
 module.exports = function (file) {
   let reqtList = [];
 
-  console.log('Called from anonymous function');
+  reader.read(file, function (data) {
+    let tiers = [];
 
-  handler.on('row', function (data) {
-    // accept only row header + 3 levels
-    if (data.length !== TIERLIMIT) {
-      const row = {
-        id: data[0],
-        tier1: parseInt(data[0]),
-        tier2: parseInt(data[1]),
-        tier3: parseInt(data[2])
-      };
-      reqtList.push(row);
+    for (var index = 1; index < data.length; index++) {
+      tiers.push(parseInt(data[index]));
+    }
+    const item = {
+      itemId: data[0],
+      tiers: tiers
     };
-  });
+    reqtList.push(item);
+  })
+    .then(result => {
+      console.dir(result);
+    });
 
-  handler.on('done', function () {
-    return reqtList;
+  //reader.on('done', function () {
+  //  return reqtList;
+  //});
+
+  reader.on('error', function (error) {
+    console.dir(error);
   });
 };

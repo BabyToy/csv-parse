@@ -29,6 +29,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="csv-data.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="csv-parser.js">
       <SubType>Code</SubType>
     </Compile>
